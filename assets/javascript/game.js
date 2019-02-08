@@ -1,25 +1,47 @@
+var wins = 0;
+var losses = 0;
+var guesses = 9;
+
+var winsText = document.getElementById("wins-text");
+var lossesText = document.getElementById("losses-text");
+var guessesText = document.getElementById("guesses-text");
+
+var computerChoice = letter();
+
 function letter() {
-    var text = "";
     var possible = "abcdefghijklmnopqrstuvwxyz";
+    return possible.charAt(Math.floor(Math.random() * possible.length));
+};
 
-    /*
-    based on source from:
-    https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-    */
-    for (var i = 0; i < 1; i++)
-      text = text + possible.charAt(Math.floor(Math.random() * possible.length));
-  
-    return text;
-}
+document.onkeyup = function(event) {
 
-console.log(letter());
+    var userText = event.key.toLowerCase();
 
-var wins=42;
+    if (userText === computerChoice) {
+        wins++;
+        guesses = 9;
+        document.getElementById('user-text').value = "";
+        computerChoice = letter();
+    }
+    else {
+        guesses--;
+    }
 
-var losses=10;
+    if (guesses === 0) {
+        losses++;
+        guesses = 9;
+        document.getElementById('user-text').value = "";
+        computerChoice = letter();
+    }
 
-if (x=random) {
-    var left=left-1;
-}
+    console.log("wins: " + wins);
+    console.log("losses: " + losses);
+    console.log("guesses: " + guesses);
+    console.log(computerChoice);
 
-var guesses=60;
+    //winsText.textContent = wins;
+    //lossesText.textContent = losses;
+    //guessesText.textContent = guesses;
+};
+
+
