@@ -13,15 +13,19 @@ function letter() {
     return possible.charAt(Math.floor(Math.random() * possible.length));
 };
 
+function reset() {
+    guesses = 9;
+    document.getElementById('user-text').value = "";
+    computerChoice = letter();
+}
+
 document.onkeyup = function(event) {
 
     var userText = event.key.toLowerCase();
 
     if (userText === computerChoice) {
         wins++;
-        guesses = 9;
-        document.getElementById('user-text').value = "";
-        computerChoice = letter();
+        reset();
     }
     else {
         guesses--;
@@ -29,19 +33,14 @@ document.onkeyup = function(event) {
 
     if (guesses === 0) {
         losses++;
-        guesses = 9;
-        document.getElementById('user-text').value = "";
-        computerChoice = letter();
+        reset();
     }
 
-    console.log("wins: " + wins);
-    console.log("losses: " + losses);
-    console.log("guesses: " + guesses);
     console.log(computerChoice);
 
-    //winsText.textContent = wins;
-    //lossesText.textContent = losses;
-    //guessesText.textContent = guesses;
+    winsText.textContent = wins;
+    lossesText.textContent = losses;
+    guessesText.textContent = guesses;
 };
 
 
